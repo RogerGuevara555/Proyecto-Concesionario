@@ -1,4 +1,3 @@
-from abc import ABC, abstractmethod
 
 #?   CALIDADES:
 #* (-) Pieza obsoleta (1pto)
@@ -23,47 +22,94 @@ from abc import ABC, abstractmethod
 #* >> Nm =MotorToyota=
 
 
-class Peace ():
-    
+from abc import ABC, abstractmethod
+
+
+class Peace (ABC):
+
     def __init__(self, brand:str, qualty:chr, condition:chr, size:chr, price:int):
         self.brand = brand              # Toyota
         self.qualty = qualty            # - = + # & 
         self.condition = condition      # N U R
         self.size = size                # b m s
         self.price = price              # 500$
-    
-    @abstractmethod
+
     def __str__(self):
-        return f"{self.condition}{self.size} {self.qualty}Pieza{self.brand}{self.qualty}"
-    
+        peace_type = self.__class__.__name__
+        pc_qual = self.qualty
+        pc_cond = self.condition
+        pc_size = self.size
+        pc_brand = self.brand
+        return f"({pc_cond}|{pc_size}) {pc_qual}{peace_type}{pc_brand}{pc_qual}"
+
     @abstractmethod
     def get_sound(self):
         return None
 
 
+
 class Motor (Peace):
-    
+
     def __init__(self, brand, qualty, condition, size, price, fuel=0):
         super().__init__(brand, qualty, condition, size, price)
         self.fuel = fuel
-    
-    
-    def __str__(self):
-        return f"{self.condition}{self.size} {self.qualty}Motor{self.brand}{self.qualty}"
-    
+
+
     def fill_fuel(self, cuantity:int):
         self.fuel += cuantity
-    
+
     def use_fuel(self, cuantity:int):
         self.fuel -= cuantity
-    
-    def get_sound(self):
-        return "Brrrr"
-    
-    
+
+    def get_sound(self) -> str:
+        return "Swanfanson"
+
+
+
+class Wheels (Peace):
+
+    def __init__(self, brand, qualty, condition, size, price):
+        super().__init__(brand, qualty, condition, size, price)
+
+    def get_sound(self) -> str:
+        return super().__str__()
+
+
+
+class Chassis (Peace):
+
+    def __init__(self, brand, qualty, condition, size, price):
+        super().__init__(brand, qualty, condition, size, price)
+
+    def get_sound(self) -> str:
+        return super().__str__()
+
+
+
+class Body (Peace):
+
+    def __init__(self, brand, qualty, condition, size, price, color):
+        super().__init__(brand, qualty, condition, size, price)
+        self.color = color
+
+    def get_sound(self) -> str:
+        return super().__str__()
+
+
+
+class Gearbox (Peace):
+
+    def __init__(self, brand, qualty, condition, size, price):
+        super().__init__(brand, qualty, condition, size, price)
+
+    def get_sound(self) -> str:
+        return super().__str__()
+
+
+
 
 if __name__ == "__main__":
-    motor = Peace("Toyota", '=', 'N', 'm', 500)
+    motor = Wheels("Toyota", '=', 'N', 'm', 500)
     print(motor)
 
 
