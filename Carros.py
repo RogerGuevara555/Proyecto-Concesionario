@@ -1,22 +1,20 @@
-
 from time import *
+import os
 
 
-
-class Carro:
-    def __init__(self, name_car, color, fuel):
-        
-        self.name_car = name_car
+class Car:
+    def __init__(self, car_name, color, fuel):
+        self.car_name = car_name
         self.color = color
         self.fuel = fuel
-        self.components_car = {  #  Hay que ponerla dentro del constructor, si no sería una variable de la clase en lugar de variable de 
+        self.car_components = {  #  Hay que ponerla dentro del constructor, si no sería una variable de la clase en lugar de variable de 
             'motor': "MotorX",   # instacia y todas las instancias de carro tendrían los mismos componentes 
             'gearbox': "CajaCambA",
             'wheels': "RuedasA",
             'chassis': "ChasisA",
             'body': "CrrA"
         }
-        
+
 #Metodo para arrancar el carro    
     def start(components):
         pass
@@ -24,55 +22,36 @@ class Carro:
     def run():
         pass
 #Roge aqui dividi el codigo en funciones simples, las que me dijiste 
-    def change_motor(self, new_peace): #Cambiar motor
-
-        print("Cambiando pieza vieja...")
-        temporal_inventory.insert(0, f"{self.components_car.pop('motor')}")
-        self.components_car.update({'motor': new_peace})
+    def change_motor(self, new_peace):
+        temporal_inventory.insert(0, f"{self.car_components.pop('motor')}")
+        self.car_components.update({'motor': new_peace})
         temporal_inventory.remove(new_peace)
-#Roger aqui puse un loop para que vieras la lista del inventario temp, si quieres la quitas
-        for piece in temporal_inventory:
-            print(piece)
-       
-                
-            
+
+
     def change_gearbox(self, new_peace):
-            print("Cambiando pieza vieja...")
-            temporal_inventory.insert(2, self.components_car.pop('gearbox'))
-            self.components_car.update({'gearbox': new_peace})
-            temporal_inventory.remove(new_peace)
-            
+        temporal_inventory.insert(0, self.car_components.pop('gearbox'))
+        self.car_components.update({'gearbox': new_peace})
+        temporal_inventory.remove(new_peace)
+
 
     def change_wheels(self, new_peace):
-        print("Cambiando pieza vieja...")
-        temporal_inventory.insert(self.components_car.pop('wheels'), -1)
-        self.components_car.update({'wheels': new_peace})
+        temporal_inventory.insert(0, self.car_components.pop('wheels')) # estos parámetros estaban invertidos
+        self.car_components.update({'wheels': new_peace})
         temporal_inventory.remove(new_peace)
-        for key, value in self.components_car.items():
-            print(f"{key}: {value}")
-            print(temporal_inventory)
-                
-            
+
+
     def change_chassis(self, new_peace):
-                print("Cambiando pieza vieja...")
-                temporal_inventory.insert(self.components_car.pop('chassis'), -1)
-                self.components_car.update({'chassis': new_peace})
-                temporal_inventory.remove(new_peace)
-                for key, value in Carro.components_car.items():
-                    print(f"{key}: {value}")
-                print(temporal_inventory)
-            
-            
+        temporal_inventory.insert(0, self.car_components.pop('chassis')) # estos parámetros estaban invertidos
+        self.car_components.update({'chassis': new_peace})
+        temporal_inventory.remove(new_peace)
+
+
     def change_body(self, new_peace):
-                print("Cambiando pieza vieja...")
-                temporal_inventory.insert(self.components_car.pop('body'), -1)
-                self.components_car.update({'body': new_peace})
-                temporal_inventory.remove(new_peace)
-                for key, value in Carro.components_car.items():
-                    print(f"{key}: {value}")
-                print(temporal_inventory)
-                    
-             
+        temporal_inventory.insert(0, self.car_components.pop('body')) # estos parámetros estaban invertidos
+        self.car_components.update({'body': new_peace})
+        temporal_inventory.remove(new_peace)
+
+
 
 
 
@@ -80,7 +59,6 @@ class Carro:
 # Por ende, iría en una clase User que Justin está implementando, creo.
 temporal_inventory = ["MotorA", "MotorB", "MotorC", "CajaCambB", "CajaCambC", "RuedasB", 'ChasisA']
 workshop_menu1 ="""
-
 Seleccione la pieza a cambiar 
 [===========================]
 | (M)   -> Motor            |
@@ -92,35 +70,56 @@ Seleccione la pieza a cambiar
 
 > """
 
-def get_list_text(text):
+carro1 = Car("Carro de Saul", "Amarillo", 100)
+
+def interfaz_provisional():
+    while True:
+        os.system('cls')
+        inventory_menu, car_components_menu = reload_menus()
+        
+        print(car_components_menu)
+        menu = input(workshop_menu1)
+        peace_index = int(input(inventory_menu))
+        new_peace = temporal_inventory[peace_index-1]
+        
+        if   menu.upper() == "M"  : carro1.change_motor(new_peace)     
+        elif menu.upper() == "CC" : carro1.change_gearbox(new_peace)
+        elif menu.upper() == "R"  : carro1.change_wheels(new_peace)
+        elif menu.upper() == "Ch" : carro1.change_chassis(new_peace)
+        elif menu.upper() == "Crr": carro1.change_body(new_peace)
+
+
+def reload_menus():
+    
+    inventory_menu = f"""
+¿Cuál deseas instalar? (introduce el índice)
+{get_inventory_as_column(temporal_inventory)}
+> """
+
+    car_components_menu = f"""
+Estas son las piezas instaladas:
+{get_car_components_as_column(carro1.car_components)}"""
+    
+    return inventory_menu,car_components_menu
+
+
+def get_inventory_as_column(text):
     new_text = ""
     for i in range(len(text)):
         new_text += f"{i+1}. {text[i]} \n"
     return new_text
 
-workshop_menu2 = f"""
-¿Cuál deseas instalar? (introduce el índice)
-{get_list_text(temporal_inventory)}
-> """
 
-
-
-def interfaz_provisional():
-    while True:
-        menu = input(workshop_menu1)
-        peace_index = int(input(workshop_menu2))
-        new_peace = temporal_inventory[peace_index-1]
-        
-        if   menu.upper() == "M"  : Carro.change_motor(new_peace)     #funciones a programar
-        elif menu.upper() == "CC" : Carro.change_gearbox(new_peace)
-        elif menu.upper() == "R"  : Carro.change_wheels(new_peace)
-        elif menu.upper() == "Ch" : Carro.change_chassis(new_peace)
-        elif menu.upper() == "Crr": Carro.change_body(new_peace)
+def get_car_components_as_column(text):
+    new_text = ""
+    for i in text.values():
+        new_text += f" -{i} \n"
+    return new_text
 
 
 
 if __name__ == '__main__':
-    print(interfaz_provisional())
+    interfaz_provisional()
 
 
 #* Cucha pa acá Saul. Lo que hice fue extraer la lógica de la interfaz en una función provisional 
@@ -136,3 +135,7 @@ if __name__ == '__main__':
 
 #Roger gracias por la ayuda, no se si lo que hice es como esperabas pero bueno, tengo un problema con la
 #variable "new_peace" el compilador me dice que falta un argumento posicional en las funciones nuevas que hice
+
+
+#*No hay de que bro, si algo puedo hacer sabiendo un poco más que tú es transmitirte ese poco de sabiduría :) 
+#* PD: Creo que no es una buena práctica chatear por el código, pero como que estamos en familia dejemos esto así XD 
