@@ -27,7 +27,7 @@ class Carro:
     def change_motor(self, new_peace): #Cambiar motor
 
         print("Cambiando pieza vieja...")
-        temporal_inventory.insert(0, f"{self.components_car.pop('motor')}")
+        temporal_inventory.insert(f"{self.components_car.pop('motor')}", -1) #El error que corregi fue en el index que lo puse mal
         self.components_car.update({'motor': new_peace})
         temporal_inventory.remove(new_peace)
 #Roger aqui puse un loop para que vieras la lista del inventario temp, si quieres la quitas
