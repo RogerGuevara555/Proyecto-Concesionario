@@ -22,34 +22,34 @@ class Car:
     def run():
         pass
 #Roge aqui dividi el codigo en funciones simples, las que me dijiste 
-    def change_motor(self, new_peace):
-        temporal_inventory.insert(0, f"{self.car_components.pop('motor')}")
-        self.car_components.update({'motor': new_peace})
-        temporal_inventory.remove(new_peace)
+    def change_motor(self, new_piece):
+        temporal_inventory.insert(0, self.car_components.pop('motor'))
+        self.car_components.update({'motor': new_piece})
+        temporal_inventory.remove(new_piece)
 
 
-    def change_gearbox(self, new_peace):
+    def change_gearbox(self, new_piece):
         temporal_inventory.insert(0, self.car_components.pop('gearbox'))
-        self.car_components.update({'gearbox': new_peace})
-        temporal_inventory.remove(new_peace)
+        self.car_components.update({'gearbox': new_piece})
+        temporal_inventory.remove(new_piece)
 
 
-    def change_wheels(self, new_peace):
+    def change_wheels(self, new_piece):
         temporal_inventory.insert(0, self.car_components.pop('wheels')) # estos parámetros estaban invertidos
-        self.car_components.update({'wheels': new_peace})
-        temporal_inventory.remove(new_peace)
+        self.car_components.update({'wheels': new_piece})
+        temporal_inventory.remove(new_piece)
 
 
-    def change_chassis(self, new_peace):
+    def change_chassis(self, new_piece):
         temporal_inventory.insert(0, self.car_components.pop('chassis')) # estos parámetros estaban invertidos
-        self.car_components.update({'chassis': new_peace})
-        temporal_inventory.remove(new_peace)
+        self.car_components.update({'chassis': new_piece})
+        temporal_inventory.remove(new_piece)
 
 
-    def change_body(self, new_peace):
+    def change_body(self, new_piece):
         temporal_inventory.insert(0, self.car_components.pop('body')) # estos parámetros estaban invertidos
-        self.car_components.update({'body': new_peace})
-        temporal_inventory.remove(new_peace)
+        self.car_components.update({'body': new_piece})
+        temporal_inventory.remove(new_piece)
 
 
 
@@ -80,13 +80,13 @@ def interfaz_provisional():
         print(car_components_menu)
         menu = input(workshop_menu1)
         peace_index = int(input(inventory_menu))
-        new_peace = temporal_inventory[peace_index-1]
+        new_piece = temporal_inventory[peace_index-1]
         
-        if   menu.upper() == "M"  : carro1.change_motor(new_peace)     
-        elif menu.upper() == "CC" : carro1.change_gearbox(new_peace)
-        elif menu.upper() == "R"  : carro1.change_wheels(new_peace)
-        elif menu.upper() == "Ch" : carro1.change_chassis(new_peace)
-        elif menu.upper() == "Crr": carro1.change_body(new_peace)
+        if   menu.upper() == "M"  : carro1.change_motor(new_piece)     
+        elif menu.upper() == "CC" : carro1.change_gearbox(new_piece)
+        elif menu.upper() == "R"  : carro1.change_wheels(new_piece)
+        elif menu.upper() == "Ch" : carro1.change_chassis(new_piece)
+        elif menu.upper() == "Crr": carro1.change_body(new_piece)
 
 
 def reload_menus():
@@ -134,7 +134,7 @@ if __name__ == '__main__':
 
 
 #Roger gracias por la ayuda, no se si lo que hice es como esperabas pero bueno, tengo un problema con la
-#variable "new_peace" el compilador me dice que falta un argumento posicional en las funciones nuevas que hice
+#variable "new_piece" el compilador me dice que falta un argumento posicional en las funciones nuevas que hice
 
 
 #*No hay de que bro, si algo puedo hacer sabiendo un poco más que tú es transmitirte ese poco de sabiduría :) 
