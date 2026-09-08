@@ -2,9 +2,17 @@ from time import *
 import os
 
 
+<<<<<<< Updated upstream
 class Car:
     def __init__(self, car_name, color, fuel):
         self.car_name = car_name
+=======
+
+class Carro:
+    def __init__(self, name_car, new_peace, color, fuel, components_car):
+        self.new_peace = new_peace
+        self.name_car = name_car
+>>>>>>> Stashed changes
         self.color = color
         self.fuel = fuel
         self.car_components = {  #  Hay que ponerla dentro del constructor, si no sería una variable de la clase en lugar de variable de 
@@ -25,7 +33,11 @@ class Car:
     def change_motor(self, new_peace): #Cambiar motor
 
         print("Cambiando pieza vieja...")
+<<<<<<< Updated upstream
         temporal_inventory.insert(0, f"{self.components_car.pop('motor')}")
+=======
+        temporal_inventory.insert(0,self.components_car.pop('motor')) #El error que corregi fue en el index que lo puse mal
+>>>>>>> Stashed changes
         self.components_car.update({'motor': new_peace})
         temporal_inventory.remove(new_peace)
 #Roger aqui puse un loop para que vieras la lista del inventario temp, si quieres la quitas
@@ -117,6 +129,7 @@ def get_inventory_as_column(text):
     return new_text
 
 
+<<<<<<< Updated upstream
 def get_car_components_as_column(text):
     new_text = ""
     for i in text.values():
@@ -127,6 +140,26 @@ def get_car_components_as_column(text):
 
 if __name__ == '__main__':
     interfaz_provisional()
+=======
+
+
+def interfaz_provisional():
+    while True:
+        menu = input(workshop_menu1)
+        peace_index = int(input(workshop_menu2))
+        new_peace = temporal_inventory[peace_index-1]
+        
+        if   menu.upper() == "M"  : Carro.change_motor(str(new_peace))    #funciones a programar
+        elif menu.upper() == "CC" : Carro.change_gearbox(new_peace)
+        elif menu.upper() == "R"  : Carro.change_wheels(new_peace)
+        elif menu.upper() == "Ch" : Carro.change_chassis(new_peace)
+        elif menu.upper() == "Crr": Carro.change_body(new_peace)
+
+
+
+
+print(interfaz_provisional())
+>>>>>>> Stashed changes
 
 
 #* Cucha pa acá Saul. Lo que hice fue extraer la lógica de la interfaz en una función provisional 
