@@ -2,18 +2,13 @@ from time import *
 import os
 
 
-<<<<<<< Updated upstream
-class Car:
-    def __init__(self, car_name, color, fuel):
-        self.car_name = car_name
-=======
+
+
 
 class Carro:
-    def __init__(self, name_car, new_peace, color, fuel, components_car):
+    def __init__(self, name_car, new_peace, fuel):
         self.new_peace = new_peace
         self.name_car = name_car
->>>>>>> Stashed changes
-        self.color = color
         self.fuel = fuel
         self.car_components = {  #  Hay que ponerla dentro del constructor, si no sería una variable de la clase en lugar de variable de 
             'motor': "MotorX",   # instacia y todas las instancias de carro tendrían los mismos componentes 
@@ -29,46 +24,46 @@ class Carro:
 
     def run():
         pass
+
+    def quit_and_save_peace(self, new_peace):
+        temporal_inventory.insert(0, f"{self.car_components.pop('motor')}")
+        temporal_inventory.remove(new_peace)
+    def set_peace(self, new_peace):
+        self.components_car.update({'motor': new_peace})
 #Roge aqui dividi el codigo en funciones simples, las que me dijiste 
     def change_motor(self, new_peace): #Cambiar motor
+        old_piece = 0
+        Carro.quit_and_save_peace(self)
+        Carro.set_peace(new_peace)
+        return old_piece
+        
 
-        print("Cambiando pieza vieja...")
-<<<<<<< Updated upstream
-        temporal_inventory.insert(0, f"{self.components_car.pop('motor')}")
-=======
-        temporal_inventory.insert(0,self.components_car.pop('motor')) #El error que corregi fue en el index que lo puse mal
->>>>>>> Stashed changes
-        self.components_car.update({'motor': new_peace})
-        temporal_inventory.remove(new_peace)
-#Roger aqui puse un loop para que vieras la lista del inventario temp, si quieres la quitas
-        for piece in temporal_inventory:
-            print(piece)
-       
-                
-            
     def change_gearbox(self, new_peace):
-            print("Cambiando pieza vieja...")
-            temporal_inventory.insert(2, self.components_car.pop('gearbox'))
-            self.components_car.update({'gearbox': new_peace})
-            temporal_inventory.remove(new_peace)
+        old_piece = 0
+        Carro.quit_and_save_peace(self)
+        Carro.set_peace(new_peace)
+        return old_piece
             
 
-    def change_wheels(self, new_piece):
-        temporal_inventory.insert(0, self.car_components.pop('wheels')) # estos parámetros estaban invertidos
-        self.car_components.update({'wheels': new_piece})
-        temporal_inventory.remove(new_piece)
+    def change_wheels(self, new_peace):
+        old_piece = 0
+        Carro.quit_and_save_peace(self)
+        Carro.set_peace(new_peace)
+        return old_piece
 
 
-    def change_chassis(self, new_piece):
-        temporal_inventory.insert(0, self.car_components.pop('chassis')) # estos parámetros estaban invertidos
-        self.car_components.update({'chassis': new_piece})
-        temporal_inventory.remove(new_piece)
+    def change_chassis(self, new_peace):
+        old_piece = 0
+        Carro.quit_and_save_peace(self)
+        Carro.set_peace(new_peace)
+        return old_piece
 
 
-    def change_body(self, new_piece):
-        temporal_inventory.insert(0, self.car_components.pop('body')) # estos parámetros estaban invertidos
-        self.car_components.update({'body': new_piece})
-        temporal_inventory.remove(new_piece)
+    def change_body(self, new_peace):
+        old_piece = 0
+        Carro.quit_and_save_peace(self)
+        Carro.set_peace(new_peace)
+        return old_piece
 
 
 
@@ -89,7 +84,7 @@ Seleccione la pieza a cambiar
 
 > """
 
-carro1 = Car("Carro de Saul", "Amarillo", 100)
+carro1 = Carro("Carro de Saul", "Amarillo", 100)
 
 def interfaz_provisional():
     while True:
@@ -101,7 +96,7 @@ def interfaz_provisional():
         peace_index = int(input(inventory_menu))
         new_piece = temporal_inventory[peace_index-1]
         
-        if   menu.upper() == "M"  : carro1.change_motor(new_piece)     
+        if   menu.upper() == "M"  : carro1.change_motor(str(new_piece))     
         elif menu.upper() == "CC" : carro1.change_gearbox(new_piece)
         elif menu.upper() == "R"  : carro1.change_wheels(new_piece)
         elif menu.upper() == "Ch" : carro1.change_chassis(new_piece)
@@ -128,8 +123,6 @@ def get_inventory_as_column(text):
         new_text += f"{i+1}. {text[i]} \n"
     return new_text
 
-
-<<<<<<< Updated upstream
 def get_car_components_as_column(text):
     new_text = ""
     for i in text.values():
@@ -140,13 +133,13 @@ def get_car_components_as_column(text):
 
 if __name__ == '__main__':
     interfaz_provisional()
-=======
+
 
 
 def interfaz_provisional():
     while True:
         menu = input(workshop_menu1)
-        peace_index = int(input(workshop_menu2))
+        peace_index = int(input(reload_menus()))
         new_peace = temporal_inventory[peace_index-1]
         
         if   menu.upper() == "M"  : Carro.change_motor(str(new_peace))    #funciones a programar
@@ -158,8 +151,7 @@ def interfaz_provisional():
 
 
 
-print(interfaz_provisional())
->>>>>>> Stashed changes
+
 
 
 #* Cucha pa acá Saul. Lo que hice fue extraer la lógica de la interfaz en una función provisional 
